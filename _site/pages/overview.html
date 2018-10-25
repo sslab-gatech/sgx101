@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Overview &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Overview</h1>
+</header>
+<div class="content">
+  <p>This section offers an overview of the properties provided by Intel SGX.</p>
+
+<p>Intel SGX (Software Guard Extension) is a new instruction set in Skylake Intel CPUs since autumn 2015. It provides a reverse sandbox that protects enclaves from:</p>
+
+<ul>
+  <li>
+    <p>OS or hypervisor</p>
+  </li>
+  <li>
+    <p>BIOS, firmware, drivers</p>
+  </li>
+  <li>
+    <p>System management module (Ring 2)</p>
+  </li>
+  <li>
+    <p>Intel management engine (ME)</p>
+  </li>
+  <li>
+    <p>Any remote attack</p>
+  </li>
+</ul>
+
+<p>In short, SGX architecture is a hardware-enforced security mechanism that requires <strong>Trusted Computing Base (TCB), Hardware Secrets, Remote Attestation, Sealed Storage and Memory Encryption</strong>.</p>
+
+<p>Here, <strong>TCB</strong> will be the CPU’s package boundary and software components related to SGX.</p>
+
+<p><strong>Hardware Secrets</strong> will be two 128-bit keys at production: Root Provisioning Key and Root Seal Key. Notice that RPK is known to Intel and RSK is not, therefore most of he derived key are based on RSK. We will discuss this later in the tutorial.</p>
+
+<p><strong>Remote Attestation</strong> is enforced for the client to prove to the service provider that an enclave is running a given software, inside a given CPU, with a given security level, for a given Individual Software Vender (ISV). This is required before the service provider decides to provide requested secrets.</p>
+
+<p><strong>Sealed Storage</strong> is required to save secret data to untrusted media. Data and code inside enclaves are not secrets. They are just logics that are required to process the secret and most of them are open sourced or can be reverse engineered. Therefore, secrets are provisioned later by the service provider and should be stored out of the enclave through sealing mechanism when necessary (e.g. for future usage).</p>
+
+<h2 id="in-summary-intel-sgx-offers-the-following-protections-from-known-hardware-and-software-attacks">In summary, Intel SGX offers the following protections from known hardware and software attacks:</h2>
+
+<ul>
+  <li>
+    <p>Enclave memory cannot be read or written from outside the enclave regardless of the current privilege level and CPU mode.</p>
+  </li>
+  <li>
+    <p>Production enclaves cannot be debugged by software or hardware debuggers.</p>
+  </li>
+  <li>
+    <p>The enclave environment cannot be entered through classic function calls, jumps, register manipulation, or stack manipulation. The only way to call an enclave function is through a new instruction that performs several protection checks.</p>
+  </li>
+  <li>
+    <p>Enclave memory is encrypted using industry-standard encryption algorithms with replay protection. Tapping the memory or connecting the DRAM modules to another system will yield only encrypted data.</p>
+  </li>
+  <li>
+    <p>The memory encryption key randomly changes every power cycle. The key is stored within the CPU and is not accessible.</p>
+  </li>
+  <li>
+    <p>Data isolated within enclaves can only be accessed by code that shares the enclave.</p>
+  </li>
+</ul>
+
+<p>As a result, the attack surface can be largely reduced after applying Intel SGX:</p>
+
+<p><img src="/sgx101/assets/pics/overview.png" alt="Attack Surface" /></p>
+
+<h2 id="however-there-are-still-several-security-limitation-faced-by-intel-sgx">However, there are still several security limitation faced by Intel SGX:</h2>
+<ul>
+  <li>
+    <p>Cache timing attacks</p>
+  </li>
+  <li>
+    <p>Physical attacks. E.g. laser fault injection attacks</p>
+  </li>
+  <li>
+    <p>Microcode malicious patching</p>
+  </li>
+  <li>
+    <p>Untrusted I/O</p>
+  </li>
+  <li>
+    <p>Human element. E.g. trusted development environment</p>
+  </li>
+  <li>
+    <p>CPU bugs and bugs in dependencies.</p>
+  </li>
+</ul>
+
+<p>Note that SGX trusted enclaves and microcode can be patched. However, memory encryption crypto cannot be patched since it is fused to hardware.</p>
+
+<p>Nevertheless, those security concerns are out of the tutorial’s scope. Now let’s get started with SGX!</p>
+
+<hr />
+
+<h2 id="references">References:</h2>
+<ol>
+  <li>https://www.blackhat.com/docs/us-16/materials/us-16-Aumasson-SGX-Secure-Enclaves-In-Practice-Security-And-Crypto-Review.pdf</li>
+  <li>http://www.cs.tau.ac.il/~tromer/istvr1516-files/lecture10-trusted-platform-sgx.pdf</li>
+  <li>https://software.intel.com/en-us/articles/intel-software-guard-extensions-tutorial-part-1-foundation</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://download.01.org/intel-sgx/linux-2.2/docs/Intel_SGX_Developer_Guide.pdf</li>
+</ol>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

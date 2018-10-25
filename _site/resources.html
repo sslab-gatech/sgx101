@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Resources &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link  active"
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Resources</h1>
+</header>
+<div class="content">
+  <p>A collection of study resources related to Intel SGX technology.</p>
+
+<h2 id="from-intel">From Intel</h2>
+
+<ul>
+  <li>
+    <p><a href="https://software.intel.com/en-us/documentation/sgx-developer-guide">SGX developer guide from Intel</a>.</p>
+  </li>
+  <li>
+    <p><a href="http://tce.webee.eedev.technion.ac.il/wp-content/uploads/sites/8/2015/10/SGX-for-Technion-TCE.pdf">This</a> is a comprehensive introduction of SGX presented by Dror Caspi from Intel in Israel Institute of Technology.</p>
+  </li>
+  <li>
+    <p><a href="https://software.intel.com/en-us/articles/introducing-the-intel-software-guard-extensions-tutorial-series">Introducing the Intel® Software Guard Extensions Tutorial Series</a> is a set of tutorial blogs provided by Intel, which is focused on developing SGX applications for Windows platform.</p>
+  </li>
+  <li>
+    <p><a href="https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures">This blog form Intel</a> provides the overview of the instructions and data structures used in SGX. It’s useful as a reference for technical terms.</p>
+  </li>
+  <li>
+    <p><a href="https://software.intel.com/en-us/articles/code-sample-intel-software-guard-extensions-remote-attestation-end-to-end-example">This blog from Intel</a> explains the Remote Attestation code example provided by Intel. Note that the code example from SGX SDK does not include the actual provisioning process with Intel Attestation Service.</p>
+  </li>
+  <li>
+    <p><a href="https://software.intel.com/en-us/articles/innovative-technology-for-cpu-based-attestation-and-sealing">Innovative Technology for CPU Based Attestation and Sealing</a> is the initial white paper for the attestation and sealing techniques now offered by SGX.</p>
+  </li>
+  <li>
+    <p><a href="https://software.intel.com/sites/default/files/managed/7e/3b/ias-api-spec.pdf">Attestation Service for Intel® Software Guard Extensions (Intel® SGX): API Documentation</a> provides the reference on how to interact with Intel Attestation Service using RESTful API.</p>
+  </li>
+  <li>
+    <p><a href="https://eprint.iacr.org/2007/194.pdf">Enhanced Privacy ID: A Direct Anonymous Attestation Scheme with Enhanced Revocation Capabilities</a> is the initial paper from Intel that proposes Enhanced Privacy ID, the anonymous attestation scheme that is adopted by Intel Attestation Service.</p>
+  </li>
+  <li>
+    <p><a href="https://arxiv.org/pdf/1801.05863.pdf">Integrating Remote Attestation with Transport Layer Security</a> introcudes how to use remote attestation to achieve a TLS connection.</p>
+  </li>
+  <li>
+    <p><a href="https://eprint.iacr.org/2016/086.pdf">This blog from Intel</a> introduces the primitives associated with SGX sealing process. <a href="https://software.intel.com/en-us/node/702997">More details</a> are also available from SGX developer guide.</p>
+  </li>
+</ul>
+
+<h2 id="from-others">From Others</h2>
+
+<ul>
+  <li>
+    <p><a href="https://eprint.iacr.org/2016/086.pdf">Intel SGX Explained</a> is a comprehensive introduction to the technology, including the architecture background and the implementation. A must-have.</p>
+  </li>
+  <li>
+    <p><a href="https://www.idc.ac.il/en/schools/cs/research/Documents/jackson-msc-thesis.pdf">Trust is in the Keys of the Beholder: Extending SGX Autonomy and Anonymity</a> is the dissertation for MS degree by Alon Jackson. It offers an extensive description of the SGX ecosystem and evaluations of SGX security guarentees.</p>
+  </li>
+  <li>
+    <p><a href="https://www.blackhat.com/docs/us-16/materials/us-16-Aumasson-SGX-Secure-Enclaves-In-Practice-Security-And-Crypto-Review.pdf">SGX Secure Enclaves in Practice</a> is a review slides of the technology during BlackHat 2016. <a href="https://github.com/kudelskisecurity/sgxfun/blob/master/paper/sgxpaper.md">This</a> is the corresponding review paper.</p>
+  </li>
+  <li>
+    <p><a href="http://www.cs.tau.ac.il/~tromer/istvr1516-files/lecture10-trusted-platform-sgx.pdf">Information Security – Theory vs. Reality</a> is another good intruduction slides from Tel Aviv University.</p>
+  </li>
+  <li>
+    <p><a href="https://insujang.github.io/2017-04-05/intel-sgx-instructions-in-enclave-initialization/">Intel SGX Instructions in Enclave Initialization</a> is a blog that explores and explains the implementation details of SGX enclave initialization very well.</p>
+  </li>
+  <li>
+    <p><a href="https://courses.cs.ut.ee/MTAT.07.022/2017_spring/uploads/Main/hiie-report-s16-17.pdf">SGX attestation process</a> is a report from University of Tartu that gives a good high level explanation of attestation process.</p>
+  </li>
+  <li>
+    <p><a href="https://insujang.github.io/2017-10-09/intel-sgx-sealing/">Intel SGX Sealing</a> is a blog that explains the details of SGX sealing process very well.</p>
+  </li>
+</ul>
+
+<h2 id="papers">Papers</h2>
+<p>Below are the best places to keep track of SGX related research papers for general purposes:</p>
+
+<ul>
+  <li>
+    <p><a href="http://ina.kaist.ac.kr/~dongsuh/SGXReadingList.html">SGX Reading List</a> A well categorized SGX reading list.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/vschiavoni/sgx-papers">An up-to-date list of system papers related to Intel SGX</a></p>
+  </li>
+</ul>
+
+<h2 id="useful">Useful</h2>
+<p>Other useful recources:</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/ayeks/SGX-hardware">A list of hardwares that support Intel SGX</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/kudelskisecurity/sgxfun">Command-line tools to analyze SGX related binaries</a></p>
+  </li>
+</ul>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

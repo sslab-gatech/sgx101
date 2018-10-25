@@ -1,0 +1,25 @@
+<p>This sealing example is only for illustration purpose. It generates a random number inside the enclave and calls the sealing api to seal it. Then it unseals the sealed data structure to verify the number. Code is available <a href="https://github.com/sangfansh/SGX101_sample_code">here</a>.</p>
+
+<p>Original unmodified version is available <a href="https://github.com/digawp/hello-enclave">here</a>.</p>
+
+<p>In <code class="highlighter-rouge">App.cpp</code>:</p>
+
+<script src="https://gist.github.com/sangfansh/9859ce170fce4fa63deba999d6d13326.js"></script>
+
+<p>The application first initializes the enclave in the main function. Then it makes an <code class="highlighter-rouge">ECall</code> into the enclave to generate a random number (a fake random number just for simplicity).</p>
+
+<script src="https://gist.github.com/sangfansh/a55622c217d4ce1b8d469667e27e615b.js"></script>
+
+<p>In order to seal the number, the application first has to <strong>allocate memory</strong> for sealed data block (line 30 at App.cpp). Then it makes another <code class="highlighter-rouge">ECall</code> into the enclave to seal the random secret.</p>
+
+<p>The <code class="highlighter-rouge">seal()</code> function is an <code class="highlighter-rouge">ECall</code> wrapper function of the trusted SGX sealing api. It passes the required parameters into function <code class="highlighter-rouge">sgx_seal_data()</code> provided by SGX SDK (<code class="highlighter-rouge">Sealing.cpp</code>). If this ECall returns successfully, the random secret will be securely sealed in <code class="highlighter-rouge">(sgx_sealed_data_t*)sealed_data</code>.</p>
+
+<script src="https://gist.github.com/sangfansh/67214567d3edf0223a1fc925e0d0f698.js"></script>
+
+<p>After the random secret is successfully sealed, the application makes another <code class="highlighter-rouge">ECall</code> <code class="highlighter-rouge">unseal()</code> to unseal the sealed_data. Function <code class="highlighter-rouge">unseal()</code> is also a wrapper function of the trusted SGX sealing api <code class="highlighter-rouge">sgx_unseal_data()</code>. If this <code class="highlighter-rouge">ECall</code> returns successfully, the unsealed content of <code class="highlighter-rouge">sealed_data</code> will be stored into <code class="highlighter-rouge">int unsealed</code>.</p>
+
+<p>Finally the application verifies the result by printing out and comparing the unsealed secret with the original generated random number (line 50 at <code class="highlighter-rouge">App.cpp</code>).</p>
+
+<p>To compile and run this example, run make inside the example directory and type <code class="highlighter-rouge">./app</code> to run the application. It should produce some output like this:</p>
+
+<p><img src="/sgx101/assets/pics/sealing_example.png" alt="sealing" /></p>

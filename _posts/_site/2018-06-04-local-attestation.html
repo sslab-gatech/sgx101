@@ -1,0 +1,39 @@
+<p>Before multiple enclaves collaborate with each other on the same platform, one enclave will have to authenticate the other locally using Intel SGX Report mechanism to verify that the counterpart is running on the same TCB platform by applying the REPORT based Diffie-Hellman Key Exchange. This procedure is referred as local attestation by Intel. The successful result of local attestation will offer a protected channel between two local enclaves with guarantee of confidentiality, integrity and replay protection.</p>
+
+<h2 id="local-attestation-abstract">Local Attestation Abstract:</h2>
+
+<p><img src="/sgx101/assets/pics/local_attestation.png" alt="local attestation" /></p>
+
+<ol>
+  <li>
+    <p>There are two enclaves on the same platform, referred to as Enclave A and Enclave B. We assume they have established a communication path between each other, and the path doesn’t need to be trusted. W.l.o.g we assume B is asking A to prove it’s running on the same platform as B.</p>
+  </li>
+  <li>
+    <p>First, B retrieves its MRENCLAVE value and sends it to A via the untrusted channel.</p>
+  </li>
+  <li>
+    <p>A uses EREPORT instruction to produce a report for B using B’s MRENCLAVE. Then A sends this report back to B. A can also include Diffie-Hellman Key Exchange data in the REPORT as user data for trusted channel creation in the future.</p>
+  </li>
+  <li>
+    <p>After B receives the REPORT from A, B calls EGETKEY instruction to get REPORT KEY to verify the REPORT. If the REPORT can be verified with the REPORT KEY, then B assures that A is on the same platform as B because the REPORT KEY is specific to the platform.</p>
+  </li>
+  <li>
+    <p>Then B use the MRENCLAVE received from A’s REPORT to create another REPORT for A and sends the REPORT to A.</p>
+  </li>
+  <li>
+    <p>A then also can do the same as step 4 to verity B is on the same platform as A.</p>
+  </li>
+  <li>
+    <p>By utilizing the user data field of the REPORT, A and B can create a secure channel using Diffie-Hellman Key Exchange. Information exchange can be encrypted by the shared symmetric key.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="references">References:</h2>
+
+<ol>
+  <li>https://www.idc.ac.il/en/schools/cs/research/Documents/jackson-msc-thesis.pdf</li>
+  <li>https://software.intel.com/en-us/articles/innovative-technology-for-cpu-based-attestation-and-sealing</li>
+  <li>https://software.intel.com/en-us/node/702983</li>
+</ol>

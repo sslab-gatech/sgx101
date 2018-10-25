@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Sealing Primitives &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Sealing Primitives</h1>
+</header>
+<div class="content">
+  <p>When an enclave is instantiated it provides protection to the data by keeping it within the boundary of the enclave. <strong>Enclave developers should identify enclave data and/or state that is considered secret and potentially needs to be preserved across the following events during which the enclave is destroyed:</strong></p>
+
+<ul>
+  <li>
+    <p>The application is done with the enclave and closes it.</p>
+  </li>
+  <li>
+    <p>The application itself is closed.</p>
+  </li>
+  <li>
+    <p>The platform is hibernated or shutdown.</p>
+  </li>
+</ul>
+
+<p>In general, the secrets provisioned to an enclave are lost when the enclave is closed. But if the secret data needs to be preserved during one of these events for future use within an enclave, then it must be stored outside the enclave boundary before closing the enclave. In order to protect and preserve the data, a mechanism is in place which allows enclave software to retrieve <strong>a key unique to that enclave</strong>. This key can only be generated by that enclave on that particular platform. Enclave software uses that key to encrypt data to the platform or to decrypt data already on the platform. SGX refer to these encrypt and decrypt operations as sealing and unsealing, respectively.</p>
+
+<p>There are two options when sealing data or future unsealing conditions (different policies to derive sealing keys from <strong>Root Sealing Key</strong>, which is only known by the enclave):</p>
+
+<h2 id="seal-to-current-enclave">Seal to Current Enclave:</h2>
+
+<p>This method binds the measurement of the current enclave, <code class="highlighter-rouge">MRENCLAVE</code>, to the key used by the sealing operation, using <code class="highlighter-rouge">EGETKEY</code> instruction. Therefore, only an enclave with the same <code class="highlighter-rouge">MRENCLAVE</code> will be able to generate the key to unseal the data. If any attribute related to the enclave has changed, the <code class="highlighter-rouge">MRENCLAVE</code> will also change. As a result, the sealing key will also change and the sealed data cannot be decrypted.</p>
+
+<h2 id="seal-to-the-enclave-author">Seal to the Enclave Author:</h2>
+
+<p>This method binds the identity of the enclave author, which is stored in the enclave’s <code class="highlighter-rouge">MRSIGNER</code> register at initialization time, to the sealing key derived from the Root Sealing Key using <code class="highlighter-rouge">EGETKEY</code> instruction. The Product ID of the enclave is also binded to the derived sealing key. Therefore, only an enclave with the same <code class="highlighter-rouge">MRSIGNER</code> measurement and the same <strong>Product ID</strong> can retrieve the sealing key and unseal the data.</p>
+
+<p>There are two benefits of this mechanism over sealing to the enclave identity. <strong>First</strong>, it allows an enclave to be upgraded by the enclave author without a complex upgrade process to unlock data sealed to the previous version of the enclave and reseal it to the new version. <strong>Second</strong>, it allows enclaves from the same author to share sealed data.</p>
+
+<h1 id="sealing-abstract">Sealing Abstract:</h1>
+
+<p>ISV enclaves are responsible for choosing and implementing the encryption scheme suitable for their needs when sealing their data. That is, SGX does not provide a complete sealing service, but rather a new security primitive (available exclusively for enclaves) based on <code class="highlighter-rouge">EGETKEY</code> features described.</p>
+
+<p>First, allocate memory within the enclave for encrypted data and the sealed data structure which contains both the data to encrypt and additional data, such as application version and enclave information, which participates in the MAC calculation.</p>
+
+<p>Then call the seal data API to perform the sealing operation, which will perform following steps:</p>
+
+<ol>
+  <li>
+    <p>Verify the input parameters. For example, make sure that the pointer to sealed data structure really points to the buffer inside the enclave.</p>
+  </li>
+  <li>
+    <p>Instantiate and populate a <strong>key request structure</strong> used in the <code class="highlighter-rouge">EGETKEY</code> operation to obtain a seal key:</p>
+  </li>
+</ol>
+
+<ul>
+  <li>Call <code class="highlighter-rouge">EREPORT</code> to obtain the ISV and TCB Security Version Numbers, which will be used in the key derivation</li>
+  <li><strong>Key Name:</strong> Identifies the key required, which in this case is the seal key.</li>
+  <li><strong>Key Policy:</strong> Use MRSIGNER to seal to the enclave’s author or MRENCLAVE to seal to the current enclave. Reserved bits must be cleared.</li>
+  <li><strong>Key ID:</strong> Call RDRAND to obtain a random number for key wear-out protection.</li>
+  <li><strong>Attribute Mask:</strong> Bitmask indicating which attributes the seal key should be bound to.</li>
+</ul>
+
+<ol>
+  <li>
+    <p>Call <code class="highlighter-rouge">EGETKEY</code> with the key request structure from the previous step to obtain the seal key.</p>
+  </li>
+  <li>
+    <p>Call the encryption algorithm to perform the seal operation with the seal key. It is recommended to utilize a function that performs <code class="highlighter-rouge">AES-GCM</code> encryption/decryption, such as the <code class="highlighter-rouge">Rijndael128GCM</code>, which is available in the Intel Integrated Performance Primitives Cryptography library.</p>
+  </li>
+  <li>
+    <p><strong>Delete</strong> the seal key from memory to prevent accidental leaks.</p>
+  </li>
+</ol>
+
+<p>Finally, save the seal data structure (including the key request structure) to external memory for future use within an enclave. The key request structure will be used in future enclave instantiations to obtain the seal key required for the decryption process.</p>
+
+<h1 id="unsealing-abstract">Unsealing Abstract:</h1>
+
+<p>First, allocate memory for the decrypted data.</p>
+
+<p>Then call the unseal API to perform the unsealing operation, which will perform following steps:</p>
+
+<ol>
+  <li>
+    <p><strong>Verify</strong> input parameters.</p>
+  </li>
+  <li>
+    <p><strong>Retrieve</strong> the key request structure stored together with the seal data structure.</p>
+  </li>
+  <li>
+    <p>Call <strong>EGETKEY</strong> with the <strong>key request structure</strong> to obtain the seal key.</p>
+  </li>
+  <li>
+    <p>Call the <strong>decryption algorithm</strong> to perform the unseal operation using the seal key.</p>
+  </li>
+  <li>
+    <p><strong>Delete</strong> the seal key from memory to prevent accidental leaks.</p>
+  </li>
+  <li>
+    <p><strong>Confirm</strong> that the hash generated by the decryption algorithm matches the one generated during encryption to ensure integrity.</p>
+  </li>
+</ol>
+
+<p>We use sample code example to explain implementation details. </p>
+
+<hr />
+
+<h2 id="references">References:</h2>
+
+<ol>
+  <li>https://eprint.iacr.org/2016/086.pdf</li>
+  <li>https://www.idc.ac.il/en/schools/cs/research/Documents/jackson-msc-thesis.pdf</li>
+  <li>https://software.intel.com/en-us/articles/innovative-technology-for-cpu-based-attestation-and-sealing</li>
+  <li>https://software.intel.com/en-us/blogs/2016/05/04/introduction-to-intel-sgx-sealing</li>
+  <li>https://insujang.github.io/2017-10-09/intel-sgx-sealing/</li>
+  <li>https://software.intel.com/en-us/node/702997</li>
+</ol>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+---
+layout: page
+title: SGX 101
+sidebar_sort_order: 1
+---
 
-You can use the [editor on GitHub](https://github.com/sslab-gatech/sgx101/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+SSLab
+----
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+We have been actively working on SGX related research.
+These research projects can be broadly classified into three different
+categories: System Design, Defense, and Attack.
 
-### Markdown
+- Please take a look at our achievements on [Attacks and Defenses for Intel SGX](files/ccs-sgx-exploits.pptx) [(PDF)](files/ccs-sgx-exploits.pdf). Demo videos can also be viewed under [SGX Bootstrap/CCS17 Tutorial](pages/ccs17.html).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Please find the selective projects [here](sslab.html).
 
-```markdown
-Syntax highlighted code block
+SGX Bootstrap
+----
 
-# Header 1
-## Header 2
-### Header 3
+[This](bootstrap.html) is the very place to learn building your first application with Intel SGX in mind.
 
-- Bulleted
-- List
+Resources
+----
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sslab-gatech/sgx101/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+[Here](resources.html) you can look up various resouces related to Intel SGX for reference.

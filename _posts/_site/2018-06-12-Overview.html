@@ -1,0 +1,95 @@
+<p>This section offers an overview of the properties provided by Intel SGX.</p>
+
+<p>Intel SGX (Software Guard Extension) is a new instruction set in Skylake Intel CPUs since autumn 2015. It provides a reverse sandbox that protects enclaves from:</p>
+
+<ul>
+  <li>
+    <p>OS or hypervisor</p>
+  </li>
+  <li>
+    <p>BIOS, firmware, drivers</p>
+  </li>
+  <li>
+    <p>System management module (Ring 2)</p>
+  </li>
+  <li>
+    <p>Intel management engine (ME)</p>
+  </li>
+  <li>
+    <p>Any remote attack</p>
+  </li>
+</ul>
+
+<p>In short, SGX architecture is a hardware-enforced security mechanism that requires <strong>Trusted Computing Base (TCB), Hardware Secrets, Remote Attestation, Sealed Storage and Memory Encryption</strong>.</p>
+
+<p>Here, <strong>TCB</strong> will be the CPU’s package boundary and software components related to SGX.</p>
+
+<p><strong>Hardware Secrets</strong> will be two 128-bit keys at production: Root Provisioning Key and Root Seal Key. Notice that RPK is known to Intel and RSK is not, therefore most of he derived key are based on RSK. We will discuss this later in the tutorial.</p>
+
+<p><strong>Remote Attestation</strong> is enforced for the client to prove to the service provider that an enclave is running a given software, inside a given CPU, with a given security level, for a given Individual Software Vender (ISV). This is required before the service provider decides to provide requested secrets.</p>
+
+<p><strong>Sealed Storage</strong> is required to save secret data to untrusted media. Data and code inside enclaves are not secrets. They are just logics that are required to process the secret and most of them are open sourced or can be reverse engineered. Therefore, secrets are provisioned later by the service provider and should be stored out of the enclave through sealing mechanism when necessary (e.g. for future usage).</p>
+
+<h2 id="in-summary-intel-sgx-offers-the-following-protections-from-known-hardware-and-software-attacks">In summary, Intel SGX offers the following protections from known hardware and software attacks:</h2>
+
+<ul>
+  <li>
+    <p>Enclave memory cannot be read or written from outside the enclave regardless of the current privilege level and CPU mode.</p>
+  </li>
+  <li>
+    <p>Production enclaves cannot be debugged by software or hardware debuggers.</p>
+  </li>
+  <li>
+    <p>The enclave environment cannot be entered through classic function calls, jumps, register manipulation, or stack manipulation. The only way to call an enclave function is through a new instruction that performs several protection checks.</p>
+  </li>
+  <li>
+    <p>Enclave memory is encrypted using industry-standard encryption algorithms with replay protection. Tapping the memory or connecting the DRAM modules to another system will yield only encrypted data.</p>
+  </li>
+  <li>
+    <p>The memory encryption key randomly changes every power cycle. The key is stored within the CPU and is not accessible.</p>
+  </li>
+  <li>
+    <p>Data isolated within enclaves can only be accessed by code that shares the enclave.</p>
+  </li>
+</ul>
+
+<p>As a result, the attack surface can be largely reduced after applying Intel SGX:</p>
+
+<p><img src="/sgx101/assets/pics/overview.png" alt="Attack Surface" /></p>
+
+<h2 id="however-there-are-still-several-security-limitation-faced-by-intel-sgx">However, there are still several security limitation faced by Intel SGX:</h2>
+<ul>
+  <li>
+    <p>Cache timing attacks</p>
+  </li>
+  <li>
+    <p>Physical attacks. E.g. laser fault injection attacks</p>
+  </li>
+  <li>
+    <p>Microcode malicious patching</p>
+  </li>
+  <li>
+    <p>Untrusted I/O</p>
+  </li>
+  <li>
+    <p>Human element. E.g. trusted development environment</p>
+  </li>
+  <li>
+    <p>CPU bugs and bugs in dependencies.</p>
+  </li>
+</ul>
+
+<p>Note that SGX trusted enclaves and microcode can be patched. However, memory encryption crypto cannot be patched since it is fused to hardware.</p>
+
+<p>Nevertheless, those security concerns are out of the tutorial’s scope. Now let’s get started with SGX!</p>
+
+<hr />
+
+<h2 id="references">References:</h2>
+<ol>
+  <li>https://www.blackhat.com/docs/us-16/materials/us-16-Aumasson-SGX-Secure-Enclaves-In-Practice-Security-And-Crypto-Review.pdf</li>
+  <li>http://www.cs.tau.ac.il/~tromer/istvr1516-files/lecture10-trusted-platform-sgx.pdf</li>
+  <li>https://software.intel.com/en-us/articles/intel-software-guard-extensions-tutorial-part-1-foundation</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://download.01.org/intel-sgx/linux-2.2/docs/Intel_SGX_Developer_Guide.pdf</li>
+</ol>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Enclave Lifecycle &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Enclave Lifecycle</h1>
+</header>
+<div class="content">
+  <p>In this section we will look into the lifecycle of enclaves.</p>
+
+<p>To initialize an enclave, four of the new CPU instructions provided by SGX architecture are used, each will be provided with a wrapper available for developers’ usage (will be explained in sample code):</p>
+
+<h2 id="ecreate">ECREATE</h2>
+
+<p>An enclave is born when the system software issues the ECREATE instruction, which turns a free EPC page into the SECS for the new enclave.</p>
+
+<p>ECREATE copies an SECS structure outside the EPC into an SECS page inside the EPC. The internal structure of SECS is not accessible to software. Software sets the following fields in the source structure: SECS:BASEADDR, SECS:SIZE, and ATTRIBUTES.</p>
+
+<p>ECREATE validates the information used to initialize the SECS, and results in a page fault or general protection fault if the information is not valid. ECREATE will also fault if SECS target page is in use; already valid; outside the EPC; addresses are not aligned; unused PAGEINFO fields are not zero.</p>
+
+<h2 id="eadd">EADD</h2>
+
+<p>The system software can use EADD instructions to load the initial code and data into the enclave. EADD is used to create both TCS pages and regular pages. This function copies a source page from non-enclave memory into the EPC, associates the EPC page with an SECS page residing in the EPC, and stores the linear address and security attributes in EPCM. EADD reads its input data from a Page Information (PAGEINFO) structure.</p>
+
+<h2 id="the-pageinfo-structure-contains">The PAGEINFO structure contains:</h2>
+
+<ul>
+  <li>
+    <p>The virtual address of the EPC page (LINADDR)</p>
+  </li>
+  <li>
+    <p>The virtual address of the non-EPC page whose contents will be copied into the newly allocated EPC page (SRCPGE)</p>
+  </li>
+  <li>
+    <p>A virtual address that resolves to the SECS of the enclave that will own the page (SECS).</p>
+  </li>
+  <li>
+    <p>The virtual address, pointing to a Security Information (SECINFO) structure, which contains the newly allocated EPC page’s access permissions (R, W, X) and its EPCM page type (RT_REG or PT_TCS).</p>
+  </li>
+  <li>
+    <p>EADD validates its inputs, and modifies the newly allocated EPC page and its EPCM entry.</p>
+  </li>
+</ul>
+
+<p>EADD ensures that the EPC page is not allocated to another enclave, the page’s virtual address falls within the enclave’s ELRANGE and all the reserved fields in SECINFO are set to zero.</p>
+
+<h2 id="eextend">EEXTEND</h2>
+
+<p>While loading an enclave, the system software will also use the EEXTEND instruction, which updates the enclave’s measurement used in the software attestation process. It updates the MRENCLAVE measurement register of an SECS with the measurement of an EXTEND string composed of EEXTEND<code class="highlighter-rouge">||</code>ENCLAVEOFFSET<code class="highlighter-rouge">||</code>PADDING<code class="highlighter-rouge">||</code>256 bytes of the enclave page. RCX register contains the effective address of the 256 byte region of an EPC page to be measured.</p>
+
+<h2 id="einit">EINIT</h2>
+
+<p>This function is the final instruction executed in the enclave build process. After EINIT, the MRENCLAVE measurement is complete, and the enclave is ready to start user code execution using EENTER instruction.</p>
+
+<p>When EINIT completes successfully, it sets the enclave’s INIT attribute to true. This opens the way for ring 3 application software to execute the enclave’s code, using the SGX instructions. On the other hand, once INIT is set to true, EADD cannot be invoked on that enclave anymore, so the system software must load all the pages that make up the enclave’s initial state before executing the EINIT instruction.</p>
+
+<p>END OF ENCLAVE INITIALIZATION</p>
+
+<hr />
+
+<h2 id="before-jumping-into-design-decisions-there-are-several-terms-need-to-be-clarified-first">Before jumping into design decisions, there are several terms need to be clarified first:</h2>
+<ul>
+  <li>
+    <p>ECall: “Enclave Call”, a call made into an interface function within the enclave</p>
+  </li>
+  <li>
+    <p>OCall: “Out Call”, a call made from within the enclave to the outside application</p>
+  </li>
+  <li>
+    <p>Trusted: Refers to any code or construct that runs inside an enclave in a “trusted” environment.</p>
+  </li>
+  <li>
+    <p>Trusted Thread Context: The context for a thread running inside the enclave. This is composed of:</p>
+
+    <ul>
+      <li>Thread Control Structure (TCS)</li>
+      <li>Thread Data/Thread Local Storage: data within the enclave and specific to the thread</li>
+      <li>State Save Area(SSA): a data buffer which holds register state when an enclave must exit due to an interrupt or exception</li>
+      <li>Stack: a stack located within the enclave</li>
+    </ul>
+  </li>
+  <li>
+    <p>Untrusted: Refers to any code or construct that runs in the applications “untrusted” environment (outside of the enclave).</p>
+  </li>
+</ul>
+
+<h2 id="this-is-the-general-approach-well-follow-for-designing-an-application-for-intel-sgx">This is the general approach we’ll follow for designing an application for Intel SGX:</h2>
+
+<ul>
+  <li>
+    <p>Identify the application’s secrets.</p>
+  </li>
+  <li>
+    <p>Identify the providers and consumers of those secrets.</p>
+  </li>
+  <li>
+    <p>Determine the enclave boundary.</p>
+  </li>
+  <li>
+    <p>Tailor the application components for the enclave.</p>
+  </li>
+</ul>
+
+<p>The first step in designing enclave is to identify the assets it needs to protect, the data structures where the assets are contained, and the set of code that operates on those data structures and then place them into a separate trusted library. It is a required step because enclave code is loaded in a special way such that once the enclave has been initialized, privileged code and the rest of the untrusted application cannot directly read data that resides in the protected environment, or change the behavior of the code within the enclave without detection.</p>
+
+<p>After defining the trusted (enclave) and untrusted (application) components of an Intel SGX enabled application, we should carefully define the interface between untrusted application and enclave. An enclave must expose an API for untrusted code to call in (ECalls) and express what functions provided by the untrusted code are needed (OCalls). Both ECalls and OCalls are defined by developers using Enclave Definition Language (EDL), and they together consist the enclave boundary.</p>
+
+<h2 id="the-enclave-definition-language">The Enclave Definition Language</h2>
+
+<p>Before moving to the actual enclave code sample, we’ll take a few moments to discuss the Enclave Definition Language (EDL) syntax. An enclave’s bridge functions, both its ECALLs and OCALLs, are prototyped in its EDL file and its general structure is as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enclave {
+	// Include files
+	// Import other edl files
+	// Data structure declarations to be used as parameters of the function prototypes in edl
+
+	trusted {
+		// Include file if any. It will be inserted in the trusted header file (enclave_t.h)
+		// Trusted function prototypes (ECALLs)
+	};
+
+	untrusted {
+		// Include file if any. It will be inserted in the untrusted header file (enclave_u.h)
+		// Untrusted function prototypes (OCALLs)
+	};
+};
+</code></pre></div></div>
+
+<p>ECALLs are prototyped in the trusted section, and OCALLs are prototyped in the untrusted section.</p>
+
+<p>When the project is built, the Edger8r tool that is included with the Intel SGX SDK parses the EDL file and generates a series of proxy functions. These proxy functions are essentially wrappers around the real functions that are prototyped in the EDL. Each ECALL and OCALL gets a pair of proxy functions: a trusted half and an untrusted half. The trusted functions go into EnclaveProject_t.h and EnclaveProjct_t.c and are included in the autogenerated Files folder of your enclave project. The untrusted proxies go into EnclaveProject_u.h and EnclaveProject_u.c and are placed in the autogenerated Files folder of the project that will be interfacing with your enclave.</p>
+
+<p><img src="/sgx101/assets/pics/lifecycle.png" alt="lifecycle" /></p>
+
+<p>Your program does not call the ECALL and OCALL functions directly; it calls the proxy functions. When you make an ECALL, you call the untrusted proxy function for the ECALL, which in turn calls the trusted proxy function inside the enclave. That proxy then calls the “real” ECALL and the return value propagates back to the untrusted function. This sequence is shown in the figure above. When you make an OCALL, the sequence is reversed: you call the trusted proxy function for the OCALL, which calls an untrusted proxy function outside the enclave that, in turn, invokes the “real” OCALL.</p>
+
+<p>More details will be explained in the example code.</p>
+
+<hr />
+
+<h2 id="references">References:</h2>
+
+<ol>
+  <li>https://eprint.iacr.org/2016/086.pdf</li>
+  <li>https://download.01.org/intel-sgx/linux-2.2/docs/Intel_SGX_Developer_Reference_Linux_2.2_Open_Source.pdf</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://insujang.github.io/2017-04-05/intel-sgx-instructions-in-enclave-initialization/</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://software.intel.com/en-us/articles/software-guard-extensions-tutorial-series-part-3</li>
+  <li>https://software.intel.com/en-us/articles/intel-software-guard-extensions-tutorial-part-7-refining-the-enclave</li>
+</ol>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

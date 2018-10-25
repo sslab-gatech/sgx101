@@ -1,0 +1,170 @@
+<p>Remote Attestation code example is available <a href="https://github.com/sangfansh">here</a></p>
+
+<p>Original unmodified version is available <a href="https://github.com/svartkanin/linux-sgx-remoteattestation">here</a></p>
+
+<p>IAS Service Guide is available <a href="https://software.intel.com/sites/default/files/managed/7e/3b/ias-api-spec.pdf">here</a></p>
+
+<h2 id="before-running-the-code-some-settings-have-to-be-set-in-the-generalsettingsh-file">Before running the code, some settings have to be set in the GeneralSettings.h file:</h2>
+
+<ul>
+  <li>
+    <p>The application port and IP</p>
+  </li>
+  <li>
+    <p>A server certificate and private key are required for the SSL communication between the SP and the Application (which can be self-signed)</p>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl req <span class="nt">-x509</span> <span class="nt">-nodes</span> <span class="nt">-newkey</span> rsa:4096 <span class="nt">-keyout</span> server.key <span class="nt">-out</span> server.crt <span class="nt">-days</span> 365
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The SPID provided by Intel when registering for the developer account</p>
+  </li>
+  <li>
+    <p>The certificate sent to Intel when registering for the developer account</p>
+  </li>
+  <li>
+    <p>IAS Rest API url (should stay the same)</p>
+  </li>
+</ul>
+
+<h2 id="to-be-able-to-run-the-above-code-some-external-libraries-are-needed">To be able to run the above code some external libraries are needed:</h2>
+
+<ul>
+  <li>Google Protocol Buffers (should already be installed with the SGX SDK package) otherwise install</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libprotobuf-dev libprotobuf-c0-dev protobuf-compiler
+</code></pre></div></div>
+
+<p><strong>All other required libraries</strong> can be installed with the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt-get <span class="nb">install </span>libboost-thread-dev libboost-system-dev curl libcurl4-openssl-dev libssl-dev liblog4cpp5-dev libjsoncpp-dev
+</code></pre></div></div>
+
+<p>After the installation of those dependencies, the code can be compiled with the following commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">cd </span>ServiceProvider
+    make
+    <span class="nb">cd</span> ../Application
+    make <span class="nv">SGX_MODE</span><span class="o">=</span>HW <span class="nv">SGX_PRERELEASE</span><span class="o">=</span>1
+</code></pre></div></div>
+
+<p>The sample application has two parts: <strong>ServiceProvider</strong> and the <strong>Application</strong>. The Application needs to prove to the ServiceProvider that it is running on a claimed trusted SGX enclave so that the Service Provider can proceed to provision secret data. The messages exchanged during the remote attestation process are serialized using <a href="https://github.com/google/protobuf">Google Protobuf</a>.</p>
+
+<p>First let’s examine the <strong>Application</strong>. The entry point of the Application is inside isv_app.cpp (ISV stands for Individual Software Vendor). It starts by initiating the <code class="highlighter-rouge">MessageHandler</code> that handles the messages to be exchanged during remote attestation.</p>
+
+<script src="https://gist.github.com/sangfansh/e884ede5fd80082eeedc70f22e8f2e4c.js"></script>
+
+<h2 id="messagehandler-a-wrapper-of-all-of-the-networking-functionalities">MessageHandler (a wrapper of all of the networking functionalities):</h2>
+
+<p>The MessageHandler has a protected enclave that handles all the secrets, as well as the generation and processing of cryptographic messages. We can see that MessageHandler has several message generation and handling functions. Specifically they are functions in forms of <code class="highlighter-rouge">generateMsgx()</code> and <code class="highlighter-rouge">handleMsgx()</code>. Google Protobuf is used by those functions to serialize the messages to be exchanged via network transportation.</p>
+
+<p>The MessageHandler also has a <code class="highlighter-rouge">NetworkManagerServer</code> object. The NetworkManagerServer object enables the Application to act as a server to initialize connection and binds itself to a client via SSL (implementation detail in server.h, using object Server* server). It also inherits <code class="highlighter-rouge">NetworkManager</code> class in order to serialize and send messages.</p>
+
+<script src="https://gist.github.com/sangfansh/9e159a13dc47ed196facd14a9a2e148a.js"></script>
+
+<p><code class="highlighter-rouge">msg -&gt; init():</code>
+<script src="https://gist.github.com/sangfansh/788651555f6e7e43ceb8dd346764da4f.js"></script>
+<script src="https://gist.github.com/sangfansh/13a82a3b4e7b5c51bfe67b7bf97cd542.js"></script>
+<script src="https://gist.github.com/sangfansh/60737cb869a669cc45f1b1960347c220.js"></script></p>
+
+<p>When the <code class="highlighter-rouge">MessageHandler</code> msg is initialized using <code class="highlighter-rouge">init()</code>, the <code class="highlighter-rouge">NetworkManagerServer</code> object inside is also initialized. It causes the initialization of <code class="highlighter-rouge">Server</code> object, which sets up the SSL io_service socket and the selected port. Then a function <code class="highlighter-rouge">incomingHandler()</code> is connected to the <code class="highlighter-rouge">NetworkManagerServer</code> as the <code class="highlighter-rouge">CallbackHandler</code>. This function is responsible for generating all the message replies according to the type of the message that it receives.</p>
+
+<p>As mentioned above, <code class="highlighter-rouge">incomingHandler(string, int)</code> handles all of the incoming messages and generates corresponding replies. Let’s briefly examine this handler (line 395 at <code class="highlighter-rouge">MessageHandler.cpp</code>).</p>
+
+<script src="https://gist.github.com/sangfansh/bda856ff5728ab7fff00172e6b98d456.js"></script>
+
+<h2 id="there-are-four-cases">There are four cases:</h2>
+
+<ul>
+  <li>
+    <p>RA_VERIFICATION</p>
+  </li>
+  <li>
+    <p>RA_MSG0</p>
+  </li>
+  <li>
+    <p>RA_MSG2</p>
+  </li>
+  <li>
+    <p>RA_ATT_RESULT</p>
+  </li>
+</ul>
+
+<p>Each case is one type of the messages that are exchanged in time order during remote attestation.</p>
+
+<p>Upon here, the ISV application’s MessageHandler has finished initialization.</p>
+
+<p><code class="highlighter-rouge">msg -&gt; start():</code>
+<script src="https://gist.github.com/sangfansh/ec0b603dc914421b58c4454f3e3ef126.js"></script>
+<script src="https://gist.github.com/sangfansh/4004e50e2bc242b5653fd6ea7dfad4a3.js"></script></p>
+
+<p>Function <code class="highlighter-rouge">start()</code> calls NetworkManager’s <code class="highlighter-rouge">startService()</code> function, which calls Server’s <code class="highlighter-rouge">start_accept()</code> to start SSL service. Upton here, the ISV has started running and is ready for any incoming traffic.</p>
+
+<h2 id="now-lets-examine-serviceproviders-structure-and-initialization-process">Now let’s examine <code class="highlighter-rouge">ServiceProvider</code>’s structure and initialization process.</h2>
+
+<p><code class="highlighter-rouge">isv_app.cpp</code> inside <code class="highlighter-rouge">ServiceProvider</code>:
+<script src="https://gist.github.com/sangfansh/2dbd162c0dc46c51d0f046f0fbc8b7ed.js"></script></p>
+
+<p>It’s the ServiceProvider Application itself. Similar to the client’s application, it has its own message handler <code class="highlighter-rouge">VerificationManager</code> since it acts as the verifier in the remote attestation process.</p>
+
+<p>Inside the VerificationManager, it has a <code class="highlighter-rouge">NetworkManagerClient</code> which also inherits <code class="highlighter-rouge">NetworkManager</code> and is responsible for the SSL connection as well as serializing and sending messages.</p>
+
+<script src="https://gist.github.com/sangfansh/d1c1443a08f7e7128fff3203379a4231.js"></script>
+
+<p>In addition, it has a <code class="highlighter-rouge">WebService</code> object to performs the verification phase with <strong>Intel Attestation Service (IAS)</strong> using the <code class="highlighter-rouge">QUOTE</code> sent from the client enclave. In one word, a <code class="highlighter-rouge">ServicePrivider</code> also acts as a wrapper of all the IAS requests and message processing, as well as any encryption key derivation, using <code class="highlighter-rouge">WebService</code>.</p>
+
+<script src="https://gist.github.com/sangfansh/dfa4b517e17cbc9030d0f09326b28698.js"></script>
+
+<p><code class="highlighter-rouge">vm -&gt; init()</code>:
+<script src="https://gist.github.com/sangfansh/f935847f93926df81b4f4b7c1bace686.js"></script></p>
+
+<p>First, dynamically allocate a new <code class="highlighter-rouge">ServiceProvider</code> to ensure freshness of secret. Then the function initializes <code class="highlighter-rouge">NetworkManagerClient</code> that will connect to the Server (the Application) using SSL. Finally, a <code class="highlighter-rouge">CallBackHandler</code> similar to the one of the Application is set up. The handler itself is the function <code class="highlighter-rouge">incomingHandler(string, int)</code> inside <code class="highlighter-rouge">VerificationManager</code> that will handle incoming messages coming from the Application during remote attestation (line 132 at <code class="highlighter-rouge">VerificationManager.cpp</code>).</p>
+
+<script src="https://gist.github.com/sangfansh/eadaa5c6e6d10fe43e3a562c8efd7f4f.js"></script>
+
+<h2 id="there-are-also-four-cases-of-handling-messages">There are also four cases of handling messages:</h2>
+
+<ul>
+  <li>
+    <p>RA_MSG0</p>
+  </li>
+  <li>
+    <p>RA_MSG1</p>
+  </li>
+  <li>
+    <p>RA_MSG3</p>
+  </li>
+  <li>
+    <p>RA_APP_ATT_OK</p>
+  </li>
+</ul>
+
+<p>Notice that at the end of the handler, it initializes the message stream with a <code class="highlighter-rouge">RA_VERIFICATION</code> type string and the actual <code class="highlighter-rouge">REQUEST</code>. By doing so right after SSL handshake, the ServiceProvider can immediately start the RA process by forwarding the remote attestation request to the Application.</p>
+
+<p><code class="highlighter-rouge">vm -&gt; start()</code>:
+<script src="https://gist.github.com/sangfansh/dbee6d345177c73d1ca2c1914aa5da3c.js"></script>
+<script src="https://gist.github.com/sangfansh/6969fb1cf21cdcd19e496a81a909947a.js"></script>
+<script src="https://gist.github.com/sangfansh/d1728c9fb3567734b1afd2d4a65ef457.js"></script></p>
+
+<p><code class="highlighter-rouge">NetworkManagerClient</code> starts the service by connecting the SSL client to server. Then the client starts the SSL handshake process with server. We can see that the <code class="highlighter-rouge">Client::handle_handshake()</code> function triggers the remote attestation by sending out the attestation request mentioned above if handshake is successful.</p>
+
+<p>Upon here, ServiceProvider and Application are connected and remote attestation process has started.</p>
+
+<hr />
+
+<p>Now let’s examine both <code class="highlighter-rouge">incomingHandler(string, int)</code> in <code class="highlighter-rouge">MessageHandler.cpp</code> and <code class="highlighter-rouge">VerificationManager.cpp</code> to reflect the remote attestation process between SP and ISV described in the tutorial.</p>
+
+<h2 id="summary-of-function-calls">Summary of function calls:</h2>
+<p><img src="/assets/pics/ra_summary.png" alt="ra" /></p>
+
+<p>(Please refer to <code class="highlighter-rouge">Messages.proto</code> for message structure details.)</p>
+
+<p>(Please refer to the two <code class="highlighter-rouge">incomingHandler</code>’s attached below for actual implementation.)</p>
+
+<p><img src="/assets/pics/ra_flow.png" alt="ra" />
+<script src="https://gist.github.com/sangfansh/bda856ff5728ab7fff00172e6b98d456.js"></script>
+<script src="https://gist.github.com/sangfansh/eadaa5c6e6d10fe43e3a562c8efd7f4f.js"></script></p>
