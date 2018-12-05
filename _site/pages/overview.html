@@ -103,34 +103,6 @@
   
 
   
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
 
   
     
@@ -222,34 +194,6 @@
     
   
 
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-
-  
-    
   
 
   
@@ -354,24 +298,30 @@
 <div class="content">
   <p>This section offers an overview of the properties provided by Intel SGX.</p>
 
+<hr />
+
+<h2 id="background">Background</h2>
+
+<p>Modern software applications tend to frequently process user private information such as usernames, passwords, credit records, encryption keys and health records. In most cases, <strong>only designated recipients should be allowed to access this secret data</strong>.</p>
+
+<p>The operating system’s duty is to enforce security policies in order to eliminate unintentional leakage of those secrets to other users and applications. For example, the operating system can prevent unauthorized users or applications from accessing other users’ files or other applications’ memory space. The operating system can also restrict unprivileged users from accessing privileged regions such as the OS kernel. At the same time, applications also apply extra protection mechanisms such as data encryption to protect themselves from malicious parties even if the operating system itself is compromised.</p>
+
+<p>However, there still persists a significant vulnerability in most of the computer systems. Even though there are numerous protection mechanisms one can apply to enhance security, there is virtually <strong>no strategy to defense a malicious party with administrative privileges</strong>. Such parties have unrestricted access to all system resources and all the running applications. Sophisticated malicious softwares can bypass protection schemes by extracting encryptions keys or even the secret data itself direct from the memory.</p>
+
+<p>In order to defense such attacks and offer users higher level of protection of their secret data, Intel designed SGX(Software Guard Extension). In short, Intel SGX offers <strong>an extra set of CPU instructions to create enclaves</strong>, areas that are protected by hardware and ensure confidentiality and integrity even in front of privileged operating systems.</p>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+
 <p>Intel SGX (Software Guard Extension) is a new instruction set in Skylake Intel CPUs since autumn 2015. It provides a reverse sandbox that protects enclaves from:</p>
 
 <ul>
-  <li>
-    <p>OS or hypervisor</p>
-  </li>
-  <li>
-    <p>BIOS, firmware, drivers</p>
-  </li>
-  <li>
-    <p>System management module (Ring 2)</p>
-  </li>
-  <li>
-    <p>Intel management engine (ME)</p>
-  </li>
-  <li>
-    <p>Any remote attack</p>
-  </li>
+  <li>OS or hypervisor</li>
+  <li>BIOS, firmware, drivers</li>
+  <li>System management module (Ring 2)</li>
+  <li>Intel management engine (ME)</li>
+  <li>Any remote attack</li>
 </ul>
 
 <p>In short, SGX architecture is a hardware-enforced security mechanism that requires <strong>Trusted Computing Base (TCB), Hardware Secrets, Remote Attestation, Sealed Storage and Memory Encryption</strong>.</p>
@@ -384,7 +334,7 @@
 
 <p><strong>Sealed Storage</strong> is required to save secret data to untrusted media. Data and code inside enclaves are not secrets. They are just logics that are required to process the secret and most of them are open sourced or can be reverse engineered. Therefore, secrets are provisioned later by the service provider and should be stored out of the enclave through sealing mechanism when necessary (e.g. for future usage).</p>
 
-<h2 id="in-summary-intel-sgx-offers-the-following-protections-from-known-hardware-and-software-attacks">In summary, Intel SGX offers the following protections from known hardware and software attacks:</h2>
+<h3 id="in-summary-intel-sgx-offers-the-following-protections-from-known-hardware-and-software-attacks">In summary, Intel SGX offers the following protections from known hardware and software attacks:</h3>
 
 <ul>
   <li>
@@ -411,31 +361,81 @@
 
 <p><img src="/sgx101/assets/pics/overview.png" alt="Attack Surface" /></p>
 
-<h2 id="however-there-are-still-several-security-limitation-faced-by-intel-sgx">However, there are still several security limitation faced by Intel SGX:</h2>
+<h3 id="however-there-are-still-several-security-limitation-faced-by-intel-sgx">However, there are still several security limitation faced by Intel SGX:</h3>
+
 <ul>
-  <li>
-    <p>Cache timing attacks</p>
-  </li>
-  <li>
-    <p>Physical attacks. E.g. laser fault injection attacks</p>
-  </li>
-  <li>
-    <p>Microcode malicious patching</p>
-  </li>
-  <li>
-    <p>Untrusted I/O</p>
-  </li>
-  <li>
-    <p>Human element. E.g. trusted development environment</p>
-  </li>
-  <li>
-    <p>CPU bugs and bugs in dependencies.</p>
-  </li>
+  <li>Cache timing attacks</li>
+  <li>Physical attacks. E.g. laser fault injection attacks</li>
+  <li>Microcode malicious patching</li>
+  <li>Untrusted I/O</li>
+  <li>Human element. E.g. trusted development environment</li>
+  <li>CPU bugs and bugs in dependencies.</li>
 </ul>
 
 <p>Note that SGX trusted enclaves and microcode can be patched. However, memory encryption crypto cannot be patched since it is fused to hardware.</p>
 
 <p>Nevertheless, those security concerns are out of the tutorial’s scope. Now let’s get started with SGX!</p>
+
+<hr />
+
+<h2 id="get-started">Get Started</h2>
+<p>Let’s get started by prepare the environment for Intel SGX.</p>
+
+<p>Before installing Intel SGX SDK, we have to first purchase an SGX-enabled Skylake CPU. Then SGX option has to be enabled in system BIOS. Finally, the Intel SGX SDK and Platform Software need to be downloaded. This tutorial will be focusing on Intel SGX on Linux using Ubuntu 16.04. SDK is available <a href="https://github.com/intel/linux-sgx">here</a>.</p>
+
+<p>Please follow the instructions to get Intel SGX SDK and PSW ready.</p>
+
+<p>The <strong>Intel SGX Platform Service (PSW)</strong> is required to run SGX enclaves. It contains drivers, services and Intel privileged enclaves for launch policy enforcement, EPID and remote attestation service and provisioning service.</p>
+
+<p>The <strong>Intel SGX SDK</strong> is required to develop SGX enclaves and applications. It contains Intel custom libc and cryptographic libraries, each with 2 versions (debug &amp; release). It also has tools such as <code class="highlighter-rouge">sgx_edger8r</code> to generate glue code (we will discuss this in the enclave tutorial) and <code class="highlighter-rouge">sgx_sign</code> to sign enclaves with development key.</p>
+
+<p>After all the required libraries are installed, we can start developing applications with SGX in mind!</p>
+
+<hr />
+
+<h2 id="application-design">Application Design</h2>
+<p>In order to create an application with SGX enabled, we need to establish enclaves, attestation and sealing.</p>
+
+<h3 id="enclave">Enclave:</h3>
+
+<p>Application design with Intel SGX requires that the application be divided into two components:</p>
+
+<ul>
+  <li>
+    <p>Trusted component: This is the enclave. The code that resides in the trusted code is the code that accesses an application’s secrets. An application can have more than one trusted component/enclave.</p>
+  </li>
+  <li>
+    <p>Untrusted component: This is the rest of the application and any of its modules. It is important to note that, from the standpoint of an enclave, the OS and the VMM are considered untrusted components.</p>
+  </li>
+</ul>
+
+<p>The trusted component should be as small as possible to save more protected memory and reduce attack surface. Meanwhile, enclaves should also have minimal trusted-untrusted component interaction.</p>
+
+<h3 id="attestation">Attestation:</h3>
+
+<p>In the Intel SGX architecture, attestation refers to the process of demonstrating that a specific enclave was established on a platform. There are two attestation mechanisms:
+Local attestation occurs when two enclaves on the same platform authenticate to each other. Remote attestation occurs when an enclave gains the trust of a remote provider.</p>
+
+<h3 id="sealing">Sealing:</h3>
+
+<p>Sealing is the process of encrypting data so that it can be written to untrusted memory or storage without revealing its contents. The data can be read back in by the enclave at a later date and unsealed (decrypted). The encryption keys are derived internally on demand and are not exposed to the enclave.</p>
+
+<h4 id="there-are-two-methods-of-sealing-data">There are two methods of sealing data:</h4>
+
+<ul>
+  <li>
+    <p>Enclave Identity: This method produces a key that is unique to this exact enclave.</p>
+  </li>
+  <li>
+    <p>Sealing Identity: This method produces a key that is based on the identity of the enclave’s Sealing Authority. Multiple enclaves from the same signing authority can derive the same key.</p>
+  </li>
+</ul>
+
+<p>Now that we have a better understanding of the main structure of an SGX application, we will proceed our tutorial to provide separate detailed explanations of each of the three main components. Each individual discussion of the component will also be followed by an existing code example to help understand implementation details.</p>
+
+<p>At the end of the tutorial, we will develop an SGX-enabled application (a password manager). And after that, you should be well equipped with all the necessary knowledge to develop your own SGX-enabled applications!</p>
+
+<p>Now let’s jump into the heart of SGX, Enclave.</p>
 
 <hr />
 

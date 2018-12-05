@@ -4,10 +4,14 @@ title: SSLab
 sidebar_link: true
 sidebar_sort_order: 2
 ---
+SSLab represents the [Systems Software & Security Lab](https://gts3.org/) from 
+Georgia Institute of Technology led by [Prof. Taesoo Kim](https://taesoo.kim/).
 
 We have been actively working on SGX related research.
 These research projects can be broadly classified into three different
 categories: System Design, Defense, and Attack.
+
+----
 
 System Design
 ----
@@ -29,6 +33,8 @@ System Design
   A design of Tor that enhances the security and privacy of the protocol by
   utilizing SGX
 
+----
+
 Defense
 ----
 
@@ -39,6 +45,8 @@ Defense
 - SGX-Shield:
   A software-based design of SGX enclaves that enables fine-grained
   address space layout randomization (ASLR)
+
+----
 
 Attack
 ----
@@ -60,6 +68,8 @@ Attack
   A vulnerability that can leak uninitialized SGX memory through
   structure padding
 
+----
+
 Publications
 ----
 
@@ -73,3 +83,65 @@ Publications
 - Fast, Scalable and Secure Onloading of Edge Functions using AirBox (SEC 2016) [[pdf]](https://sslab.gtisc.gatech.edu/assets/papers/2016/bhardwaj:airbox.pdf)
 - S-NFV: Securing NFV states by using SGX (SDNNFVSEC 2016) [[pdf]](https://sslab.gtisc.gatech.edu/assets/papers/2016/shih:snfv.pdf)
 - OpenSGX: An Open Platform for SGX Research (NDSS 2016) [[pdf]](https://sslab.gtisc.gatech.edu/assets/papers/2016/jain:opensgx.pdf)
+
+----
+
+Demos
+----
+
+#### 1. Branch Shadowing
+
+This video shows how the branch shadowing attack can extract
+RSA private key bits
+
+- Target code: Sliding window exponentiation of mbedTLS
+- Attack code: We modified Linux SGX SDK to run our shadow code
+- Kernel log: Our attack code prints the output of LBR via dmesg
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R_C0rfbg3p8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 2. Dark ROP
+
+This video shows how the Dark ROP attack detects
+memcpy() and copy the entire memory contents of
+an enclave to the outside.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kixVRC-SHQE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 3. SGX page-table-based attack
+
+This video presents the page-table-based attack,
+which is also known as the controlled-channel attack.
+By manipulating the page table and hooking the page
+fault handler, the attacker is able to observe
+precise page access patterns.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MCSlgEqNhIA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 4. SGX-Shield
+
+This video demonstrates the effectiveness of fine-grained
+ASLR support of SGX-Shield.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0aSilQ5SR58" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 5. T-SGX
+
+This video shows how T-SGX protect an SGX enclave from
+page-table-based attacks.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uHt6D-lHl68" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 6. SGX-Bomb
+
+This video shows how the SGX-Bomb attack locks down
+a victim machine.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Sutd0uCdY2E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+#### 7. SGX-Bleed
+
+This video shows how the SGX-Bleed problem leaks
+uninitialized SGX memory via structure padding.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Cd-o_wV4iGk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

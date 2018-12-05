@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Enclave &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Enclave</h1>
+</header>
+<div class="content">
+  <p>In this section we will look into the details of enclaves.</p>
+
+<hr />
+
+<h2 id="physical-memory-organization">Physical Memory Organization</h2>
+
+<p>The enclave’s code and data is stored in Processor Reserved Memory (PRM), which is a subset of DRAM that cannot be directly accessed by other software, including system software and System Management Module code (Ring 2). Direct Memory Access targeting the PRM is also rejected by the CPU in order to protect enclave from other peripherals.</p>
+
+<h3 id="enclave-page-cache-epc">Enclave Page Cache (EPC)</h3>
+
+<p>The contents of enclaves and the associated data structures are stored in the Enclave Page Cache (EPC), which is a subset of the PRM.</p>
+
+<p><img src="/sgx101/assets/pics/enclave1.png" alt="PRM" /></p>
+
+<p>The SGX design supports having multiple enclaves on a system at the same time, which is a necessity in multi-process environments. This is achieved by having the EPC split into 4 KB pages that can be assigned to different enclaves. The EPC uses the same page size as the architecture’s address translation feature.</p>
+
+<p>The EPC is managed by the same system software that manages the rest of the computer’s physical memory. The system software, which can be a hypervisor or an OS kernel, uses SGX instructions to allocate unused pages to enclaves, and to free previously allocated EPC pages. Non-enclave software cannot directly access the EPC, as it is contained in the PRM.</p>
+
+<h3 id="enclave-page-cache-map-epcm">Enclave Page Cache Map (EPCM)</h3>
+
+<p>The SGX design expects the system software to allocate the EPC pages to enclaves. However, as the system software is not trusted, SGX processors check the correctness of the system software’s allocation decisions, and refuse to perform any action that would compromise SGX’s security guarantees. For example, if the system software attempts to allocate the same EPC page to two enclaves, the SGX instruction used to perform the allocation will fail.</p>
+
+<p>In order to perform its security checks, SGX records some information about the system software’s allocation decisions for each EPC page in the Enclave Page Cache Map (EPCM). The EPCM is an array with one entry per EPC page, so computing the address of a page’s EPCM entry only requires a bitwise shift operation and an addition. (Like the page table in a regular OS)</p>
+
+<p><img src="/sgx101/assets/pics/enclave2.png" alt="EPCM" /></p>
+
+<p>Above are the fields in an EPCM entry that track the ownership of pages.</p>
+
+<p>The SGX instructions that allocate an EPC page set the <code class="highlighter-rouge">VALID</code> bit of the corresponding EPCM entry to <code class="highlighter-rouge">1</code>, and refuse to operate on EPC pages whose <code class="highlighter-rouge">VALID</code> bit is already set.</p>
+
+<p>The instruction used to allocate an EPC page also determines the page’s intended usage, which is recorded in the page type (<code class="highlighter-rouge">PT</code>) field of the corresponding EPCM entry. The pages that store an enclave’s code and data are considered to have a regular type (<code class="highlighter-rouge">PT_REG</code>). The pages dedicated to the storage of SGX’s supporting data structures are tagged with special types. For example, the PT_SECS type identifies pages that hold SGX Enclave Control Structures.</p>
+
+<p>A page’s EPCM entry also identifies the enclave that owns the EPC page. This information is used by the mechanisms that enforce SGX’s isolation guarantees to prevent an enclave from accessing another enclave’s private information. As the EPCM identifies a single owning enclave for each EPC page, it is impossible for enclaves to communicate via shared memory using EPC pages.</p>
+
+<h3 id="sgx-enclave-control-structure-secs">SGX Enclave Control Structure (SECS)</h3>
+
+<p>SGX stores per-enclave metadata in a SGX Enclave Control Structure (SECS) associated with each enclave. Each SECS is stored in a dedicated EPC page with the page type <code class="highlighter-rouge">PT_SECS</code>. These pages are not intended to be mapped into any enclave’s address space, and are exclusively used by the CPU’s SGX implementation.</p>
+
+<p>An enclave’s identity is almost synonymous to its SECS. The first step in bringing an enclave to life allocates an EPC page to serve as the enclave’s SECS, and the last step in destroying an enclave deallocates the page holding its SECS. The EPCM entry field identifying the enclave that owns an EPC page points to the enclave’s SECS. The system software uses the virtual address of an enclave’s SECS to identify the enclave when invoking SGX instructions.</p>
+
+<p>All SGX instructions take virtual addresses as their inputs. Given that SGX instructions use SECS addresses to identify enclaves, the system software must create entries in its page tables pointing to the SECS of the enclaves it manages. However, the system software cannot access any SECS page, as these pages are stored in the PRM. SECS pages are not intended to be mapped inside their enclaves’ virtual address spaces, and SGX-enabled processors explicitly prevent enclave code from accessing SECS pages.</p>
+
+<h2 id="memory-layout-of-enclave-virtual-memory">Memory Layout of Enclave (Virtual Memory)</h2>
+
+<p>SGX was designed to minimize the effort required to convert application code to take advantage of enclaves. Therefore, it adopts similar memory address translation mechanism as the system software such as operating system or hypervisor.</p>
+
+<h3 id="enclave-linear-address-range-elrange">Enclave Linear Address Range (ELRANGE)</h3>
+
+<p><em>(“Linear” roughly means “virtual” in regular memory layout)</em> Each enclave designates an area in its virtual address space, called the enclave linear address range (ELRANGE), which is used to map the code and the sensitive data stored in the enclave’s EPC pages. The virtual address space outside ELRANGE is mapped to access non-EPC memory via the same virtual addresses as the enclave’s host process.</p>
+
+<p><img src="/sgx101/assets/pics/enclave3.png" alt="ELRANGE" /></p>
+
+<p>The SGX design guarantees that the enclave’s memory accesses inside ELRANGE obey the virtual memory abstraction, while memory accesses outside ELRANGE receive no guarantees (because system software cannot be trusted). Therefore, enclaves must store all their code and private data inside ELRANGE, and must consider the memory outside ELRANGE to be an untrusted interface to the outside world.</p>
+
+<p>ELRANGE is specified using a base (the <code class="highlighter-rouge">BASEADDR</code> field) and a size (the <code class="highlighter-rouge">SIZE</code>) in the enclave’s SECS. ELRANGE must meet the same constraints as a variable memory type range and as the PRM range, namely the size must be a power of 2, and the base must be aligned to the size. These restrictions are in place so that the SGX implementation can inexpensively check whether an address belongs to an enclave’s ELRANGE quickly, in either hardware or software.</p>
+
+<h3 id="sgx-enclave-attributes">SGX Enclave Attributes</h3>
+
+<p>The execution environment of an enclave is heavily influenced by the value of the <code class="highlighter-rouge">ATTRIBUTES</code> field in the enclave’s SECS.</p>
+
+<p><img src="/sgx101/assets/pics/enclave4.png" alt="Enclave Attrbites" /></p>
+
+<p>The most important attribute, from a security perspective, is the DEBUG flag. When this flag is set, it enables the use of SGX’s debugging features for this enclave. These debugging features include the ability to read and modify most of the enclave’s memory. Therefore, DEBUG should only be set in a development environment, as it causes the enclave to lose all the SGX security guarantees.</p>
+
+<p>SGX guarantees that enclave code will always run with the XCR0 register set to the value indicated by extended features request mask (XFRM). Enclave authors are expected to use XFRM to specify the set of architectural extensions enabled by the compiler used to produce the enclave’s code.</p>
+
+<p>The MODE64BIT flag is set to true for enclaves that use the 64-bit Intel architecture.</p>
+
+<p>The INIT flag is always false when the enclave’s SECS is created. The flag is set to true at a certain point in the enclave lifecycle.</p>
+
+<h3 id="address-translation-for-sgx-enclaves">Address Translation for SGX Enclaves</h3>
+
+<p>Under SGX, the operating system and hypervisor are still in full control of the page tables and Extended Page Tables, and each enclave’s code uses the same address translation process and page tables as its host application. This minimizes the amount of changes required to add SGX support to existing system software. At the same time, having the page tables managed by untrusted system software opens SGX up to the address translation attacks.</p>
+
+<p>SGX’s active memory mapping attacks defense mechanisms revolve around ensuring that each EPC page can only be mapped at a specific virtual address. When an EPC page is allocated, its intended virtual address is recorded in the EPCM entry for the page, in the <code class="highlighter-rouge">ADDRESS</code> field.</p>
+
+<p>When an address translation result is the physical address of an EPC page, the CPU ensures that the virtual address given to the address translation process matches the expected virtual address recorded in the page’s EPCM entry.</p>
+
+<p><img src="/sgx101/assets/pics/enclave5.png" alt="EPCM Entry" /></p>
+
+<p>SGX also protects against some passive memory mapping attacks and fault injection attacks by ensuring that the access permissions of each EPC page always match the enclave author’s intentions. The access permissions for each EPC page are specified when the page is allocated, and recorded in the readable (<code class="highlighter-rouge">R</code>), writable (<code class="highlighter-rouge">W</code>), and executable (<code class="highlighter-rouge">X</code>) fields in the page’s EPCM entry.</p>
+
+<p>An enclave author must include memory layout information (“page table”) along with the enclave, in such a way that the system software loading the enclave will know the expected virtual memory address and access permissions for each enclave page. In return, the SGX design guarantees to the enclave authors that the system software, which manages the page tables and Extended Page Table, will not be able to set up an enclave’s virtual address space in a manner that is inconsistent with the author’s expectations.</p>
+
+<p>Finally, a SGX-enabled CPU will ensure that the virtual memory inside ELRANGE is mapped to EPC pages. This prevents the system software from carrying out an address translation attack where it maps the enclave’s entire virtual address space to DRAM pages outside the PRM, which do not trigger any of the checks above, and can be directly accessed by the system software.</p>
+
+<h2 id="thread-control-structure-tcs">Thread Control Structure (TCS)</h2>
+
+<p>The SGX design fully supports multi-core processors. It is possible for multiple logical processors to concurrently execute the same enclave’s code at the same time, via different threads.</p>
+
+<p>The SGX implementation uses a Thread Control Structure (TCS) for each logical processor that executes an enclave’s code. </p>
+
+<p>Each TCS is stored in a dedicated EPC page whose EPCM entry type is PT_TCS. Some of the first few fields are considered to belong to the architectural part of the structure, and therefore are guaranteed to have the same semantics on all the processors that support SGX. The rest of the TCS is not documented.</p>
+
+<p>The contents of an EPC page that holds a TCS cannot be directly accessed, even by the code of the enclave that owns the TCS. This restriction is similar to the restriction on accessing EPC pages holding SECS instances. However, the architectural fields in a TCS can be read by enclave debugging instructions.</p>
+
+<p>The architectural fields in the TCS lay out the context switches performed by a logical processor when it transitions between executing non-enclave and enclave code.</p>
+
+<h3 id="state-save-area-ssa">State Save Area (SSA)</h3>
+
+<p>When the processor encounters a hardware exception, such as an interrupt, while executing the code inside an enclave, it performs a privilege level switch and invokes a hardware exception handler provided by the system software. Before executing the exception handler, however, the processor needs a secure area to store the enclave code execution context, so that the information in the execution context is not revealed to the untrusted system software.</p>
+
+<p>In the SGX design, the area used to store an enclave thread’s execution context while a hardware exception is handled is called a State Save Area (SSA). Each TCS references a contiguous sequence of SSAs. The offset of the SSA array (OSSA) field specifies the location of the first SSA in the enclave’s virtual address space. The number of SSAs (NSSA) field indicates the number of available SSAs.</p>
+
+<p><img src="/sgx101/assets/pics/enclave6.png" alt="SSA" /></p>
+
+<p>Each SSA starts at the beginning of an EPC page, and uses up the number of EPC pages that is specified in the SSAFRAMESIZE field of the enclave’s SECS. These alignment and size restrictions most likely simplify the SGX implementation by reducing the number of special cases that it needs to handle.</p>
+
+<p>An enclave thread’s execution context consists of the general-purpose registers (GPRs) and the result of the XSAVE instruction. Therefore, the size of the execution context depends on the requested-feature bitmap (RFBM) used by to XSAVE. All the code in an enclave uses the same RFBM, which is declared in the XFRM enclave attribute. The number of EPC pages reserved for each SSA, specified in SSAFRAMESIZE, must be large enough to fit the XSAVE output for the feature bitmap specified by XFRM.</p>
+
+<p>SSAs are stored in regular EPC pages, whose EPCM page type is PT_REG. Therefore, the SSA contents is accessible to enclave software. This opens up possibilities for an enclave exception handler that is invoked by the host application after a hardware exception occurs, and acts upon the information in a SSA.</p>
+
+<hr />
+
+<h2 id="enclave-lifecycle">Enclave Lifecycle</h2>
+
+<p>To initialize an enclave, four of the new CPU instructions provided by SGX architecture are used, each will be provided with a wrapper available for developers’ usage (will be explained in sample code):</p>
+
+<h3 id="ecreate">ECREATE</h3>
+
+<p>An enclave is born when the system software issues the ECREATE instruction, which turns a free EPC page into the SECS for the new enclave.</p>
+
+<p><code class="highlighter-rouge">ECREATE</code> copies an SECS structure outside the EPC into an SECS page inside the EPC. The internal structure of SECS is not accessible to software. Software sets the following fields in the source structure: <code class="highlighter-rouge">SECS:BASEADDR</code>, <code class="highlighter-rouge">SECS:SIZE</code>, and <code class="highlighter-rouge">ATTRIBUTES</code>.</p>
+
+<p><code class="highlighter-rouge">ECREATE</code> validates the information used to initialize the SECS, and results in a page fault or general protection fault if the information is not valid. <code class="highlighter-rouge">ECREATE</code> will also fault if SECS target page is in use; already valid; outside the EPC; addresses are not aligned; unused <code class="highlighter-rouge">PAGEINFO</code> fields are not zero.</p>
+
+<h3 id="eadd">EADD</h3>
+
+<p>The system software can use <code class="highlighter-rouge">EADD</code> instructions to load the initial code and data into the enclave. <code class="highlighter-rouge">EADD</code> is used to create both TCS pages and regular pages. This function copies a source page from non-enclave memory into the EPC, associates the EPC page with an SECS page residing in the EPC, and stores the linear address and security attributes in EPCM. EADD reads its input data from a Page Information (<code class="highlighter-rouge">PAGEINFO</code>) structure.</p>
+
+<h4 id="the-pageinfo-structure-contains">The PAGEINFO structure contains:</h4>
+
+<ul>
+  <li>
+    <p>The virtual address of the EPC page (<code class="highlighter-rouge">LINADDR</code>)</p>
+  </li>
+  <li>
+    <p>The virtual address of the non-EPC page whose contents will be copied into the newly allocated EPC page (<code class="highlighter-rouge">SRCPGE</code>)</p>
+  </li>
+  <li>
+    <p>A virtual address that resolves to the SECS of the enclave that will own the page (<code class="highlighter-rouge">SECS</code>).</p>
+  </li>
+  <li>
+    <p>The virtual address, pointing to a Security Information (<code class="highlighter-rouge">SECINFO</code>) structure, which contains the newly allocated EPC page’s access permissions (<code class="highlighter-rouge">R, W, X</code>) and its EPCM page type (<code class="highlighter-rouge">RT_REG</code> or <code class="highlighter-rouge">PT_TCS</code>).</p>
+  </li>
+  <li>
+    <p>EADD validates its inputs, and modifies the newly allocated EPC page and its EPCM entry.</p>
+  </li>
+</ul>
+
+<p>EADD ensures that the EPC page is not allocated to another enclave, the page’s virtual address falls within the enclave’s ELRANGE and all the reserved fields in <code class="highlighter-rouge">SECINFO</code> are set to zero.</p>
+
+<h3 id="eextend">EEXTEND</h3>
+
+<p>While loading an enclave, the system software will also use the <code class="highlighter-rouge">EEXTEND</code> instruction, which updates the enclave’s measurement used in the software attestation process. It updates the MRENCLAVE measurement register of an SECS with the measurement of an EXTEND string composed of <code class="highlighter-rouge">EEXTEND || ENCLAVEOFFSET || PADDING || 256 bytes of the enclave page</code>. RCX register contains the effective address of the 256 byte region of an EPC page to be measured.</p>
+
+<h3 id="einit">EINIT</h3>
+
+<p>This function is the final instruction executed in the enclave build process. After <code class="highlighter-rouge">EINIT</code>, the <code class="highlighter-rouge">MRENCLAVE</code> measurement is complete, and the enclave is ready to start user code execution using <code class="highlighter-rouge">EENTER</code> instruction.</p>
+
+<p>When <code class="highlighter-rouge">EINIT</code> completes successfully, it sets the enclave’s <code class="highlighter-rouge">INIT</code> attribute to true. This opens the way for ring 3 application software to execute the enclave’s code, using the SGX instructions. On the other hand, once <code class="highlighter-rouge">INIT</code> is set to true, <code class="highlighter-rouge">EADD</code> cannot be invoked on that enclave anymore, so the system software must load all the pages that make up the enclave’s initial state before executing the <code class="highlighter-rouge">EINIT</code> instruction.</p>
+
+<hr />
+
+<h4 id="before-jumping-into-design-decisions-there-are-several-terms-need-to-be-clarified-first">Before jumping into design decisions, there are several terms need to be clarified first:</h4>
+
+<ul>
+  <li>
+    <p>ECALL: “Enclave Call”, a call made into an interface function within the enclave</p>
+  </li>
+  <li>
+    <p>OCALL: “Out Call”, a call made from within the enclave to the outside application</p>
+  </li>
+  <li>
+    <p>Trusted: Refers to any code or construct that runs inside an enclave in a “trusted” environment.</p>
+  </li>
+  <li>
+    <p>Trusted Thread Context: The context for a thread running inside the enclave. This is composed of:</p>
+
+    <ul>
+      <li>Thread Control Structure (TCS)</li>
+      <li>Thread Data/Thread Local Storage: data within the enclave and specific to the thread</li>
+      <li>State Save Area(SSA): a data buffer which holds register state when an enclave must exit due to an interrupt or exception</li>
+      <li>Stack: a stack located within the enclave</li>
+    </ul>
+  </li>
+  <li>
+    <p>Untrusted: Refers to any code or construct that runs in the applications “untrusted” environment (outside of the enclave).</p>
+  </li>
+</ul>
+
+<h4 id="this-is-the-general-approach-well-follow-for-designing-an-application-for-intel-sgx">This is the general approach we’ll follow for designing an application for Intel SGX:</h4>
+
+<ol>
+  <li>
+    <p>Identify the application’s secrets.</p>
+  </li>
+  <li>
+    <p>Identify the providers and consumers of those secrets.</p>
+  </li>
+  <li>
+    <p>Determine the enclave boundary.</p>
+  </li>
+  <li>
+    <p>Tailor the application components for the enclave.</p>
+  </li>
+</ol>
+
+<p>The first step in designing enclave is to identify the assets it needs to protect, the data structures where the assets are contained, and the set of code that operates on those data structures and then place them into a separate trusted library. It is a required step because enclave code is loaded in a special way such that once the enclave has been initialized, privileged code and the rest of the untrusted application cannot directly read data that resides in the protected environment, or change the behavior of the code within the enclave without detection.</p>
+
+<p>After defining the trusted (enclave) and untrusted (application) components of an Intel SGX enabled application, we should carefully define the interface between untrusted application and enclave. An enclave must expose an API for untrusted code to call in (ECALLs) and express what functions provided by the untrusted code are needed (OCALLs). Both ECALLs and OCALLs are defined by developers using <strong>Enclave Definition Language</strong> (EDL), and they together consist the enclave boundary.</p>
+
+<h3 id="the-enclave-definition-language">The Enclave Definition Language</h3>
+
+<p>Before moving to the actual enclave code sample, we’ll take a few moments to discuss the Enclave Definition Language (EDL) syntax. An enclave’s bridge functions, both its ECALLs and OCALLs, are prototyped in its EDL file and its general structure is as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enclave {
+	// Include files
+	// Import other edl files
+	// Data structure declarations to be used as parameters of the function prototypes in edl
+
+	trusted {
+		// Include file if any. It will be inserted in the trusted header file (enclave_t.h)
+		// Trusted function prototypes (ECALLs)
+	};
+
+	untrusted {
+		// Include file if any. It will be inserted in the untrusted header file (enclave_u.h)
+		// Untrusted function prototypes (OCALLs)
+	};
+};
+</code></pre></div></div>
+
+<p><strong>ECALLs</strong> are prototyped in the trusted section, and <strong>OCALLs</strong> are prototyped in the untrusted section.</p>
+
+<p>When the project is built, the Edger8r tool that is included with the Intel SGX SDK parses the EDL file and generates a series of proxy functions. These proxy functions are essentially wrappers around the real functions that are prototyped in the EDL. Each ECALL and OCALL gets a pair of proxy functions: a trusted half and an untrusted half. The trusted functions go into <code class="highlighter-rouge">EnclaveProject_t.h</code> and <code class="highlighter-rouge">EnclaveProjct_t.c</code> and are included in the autogenerated Files folder of your enclave project. The untrusted proxies go into <code class="highlighter-rouge">EnclaveProject_u.h</code> and <code class="highlighter-rouge">EnclaveProject_u.c</code> and are placed in the autogenerated Files folder of the project that will be interfacing with your enclave.</p>
+
+<p><img src="/sgx101/assets/pics/lifecycle.png" alt="lifecycle" /></p>
+
+<p>Your program does not call the ECALL and OCALL functions directly; it calls the proxy functions. When you make an ECALL, you call the untrusted proxy function for the ECALL, which in turn calls the trusted proxy function inside the enclave. That proxy then calls the “real” ECALL and the return value propagates back to the untrusted function. This sequence is shown in the figure above. When you make an OCALL, the sequence is reversed: you call the trusted proxy function for the OCALL, which calls an untrusted proxy function outside the enclave that, in turn, invokes the “real” OCALL.</p>
+
+<p>More details will be explained in the example code.</p>
+
+<hr />
+
+<h2 id="enclave-example">Enclave Example</h2>
+
+<p>Now let’s start with an enclave Hello world coding example.</p>
+
+<p>Code is available under HelloEnclave <a href="https://github.com/sangfansh/SGX101_sample_code.git">here</a>. It is a simplified version of SampleEnclave example at Linux SGX SDK.</p>
+
+<script src="https://gist.github.com/sangfansh/06404e21377ddac93883aae79ab05096.js"></script>
+
+<p>The <code class="highlighter-rouge">App.h</code> head file defines the application we are going to create. Here, enclave initialization token is define as the <code class="highlighter-rouge">enclave.token</code> file and the signed enclave shared object after compilation will be <code class="highlighter-rouge">enclave.signed.so</code> (line 52, 53).</p>
+
+<p>A global <code class="highlighter-rouge">sgx_enclave_id_t</code> is also declared to uniquely identify the enclave (line 55).</p>
+
+<p>Now let’s move to <code class="highlighter-rouge">App.cpp</code>.
+<script src="https://gist.github.com/sangfansh/839f2ea7e03f09876a2f2d73cfdf4753.js"></script></p>
+
+<p>As it is in the untrusted application, we must include <code class="highlighter-rouge">sgx_urts.h</code>, the SGX untrusted runtime system, for SGX to work correctly with the application. We also include <code class="highlighter-rouge">Enclave_u.h</code>, which will include all of the ECALL proxies generated from the EDL file after compilation.</p>
+
+<p>Line 48-150 just summarize all the possible error code caused by enclave operation.</p>
+
+<p>The critical function here is <code class="highlighter-rouge">initialize_enclave(void)</code> at line 157. It first retrieves the launch token from previous transactions if available. If not, just use an empty buffer to record it. Then it calls <code class="highlighter-rouge">sgx_create_enclave()</code> function provided by urts library to officially initialize the enclave instance. The <code class="highlighter-rouge">sgx_create_enclave()</code> will performs an implicit ECALL. The implicit ECALL initiates enclave runtime initialization flow described in the Enclave Lifecycle tutorial. The actual enclave instance shared object will be saved as <code class="highlighter-rouge">enclave.signed.so</code>, which is signed by the CPU as indicated by the filename. And the enclave id will be saved in <code class="highlighter-rouge">global_eid</code> for future access.</p>
+
+<p>We can ignore the <code class="highlighter-rouge">ocall_print_string()</code> function as it was in the original sample code.</p>
+
+<p>In the main body of the application, we first initialize the enclave by calling <code class="highlighter-rouge">initialize_enclave()</code>. Then call our printf_helloworld() function, which will be discussed later.</p>
+
+<p>Finally, we destroy the enclave instance by calling <code class="highlighter-rouge">sgx_destroy_enclave()</code> provided by urts library. It will perform the implicit ECALL that performs instructions that destry the targeted enclave.</p>
+
+<p>Since our purpose of this example application is to print something from the enclave instead from the untrusted application directly, the enclave part should only contain the function that performs this task.</p>
+
+<script src="https://gist.github.com/sangfansh/cfb8878e43f64c9d458162907c8424e1.js"></script>
+
+<p>The enclave header file declares the <code class="highlighter-rouge">printf_helloworld()</code> function, which will be responsible for our purpose. This function call will be protected by the enclave so outside world won’t know the secret being processed. But for demonstration purposes, we will just print out the secret from the enclave to the screen by calling this function.</p>
+
+<script src="https://gist.github.com/sangfansh/1bbd511db1fe67ce69953a39089d6cee.js"></script>
+
+<p>We define the <code class="highlighter-rouge">printf_helloworld()</code> function as a part of the enclave protected code path, which just prints out <code class="highlighter-rouge">Hello World</code> to the console. In reality, the secret string should be passed into the enclave from outside world, and will be protected by the enclave. Now since the untrusted application cannot access the enclave content directly, in order for the untrusted function to call enclave functions, we have to rely on the assistance of proxy functions, which will be generated by the Edger8r tool from EDL file after compilation. </p>
+
+<h4 id="the-proxy-functions-are-responsible-for">The proxy functions are responsible for:</h4>
+<ul>
+  <li>Marshaling data into and out of the enclave</li>
+  <li>Placing the return value of the real ECALL or OCALL in an address referenced by a pointer parameter</li>
+  <li>Returning the success or failure of the ECALL or OCALL itself as an <code class="highlighter-rouge">sgx_status_t</code> value</li>
+</ul>
+
+<p>Note that this means each ECALL or OCALL has potentially two return values. There’s the success of the ECALL or OCALL itself, meaning, were we able to successfully enter or exit the enclave, and then the return value of the function being called in the ECALL or OCALL.</p>
+
+<p>Additional arguments will added to the parameter list for each proxy function and the proxy functions now return a type of <code class="highlighter-rouge">sgx_status_t</code> instead of the original return types. The first additional parameter is the enclave identifier, eid. The second argument to the proxy function is a pointer to an address that will store the return value from the original enclave function if it has a return value. Since our <code class="highlighter-rouge">printf_helloworld()</code> function does not have a return value, the proxy function generated for it will look like 
+<script src="https://gist.github.com/sangfansh/c8bfa25fdaf73776480f3f0bee00c712.js"></script></p>
+
+<p>We can verify that after compiling the whole project.</p>
+
+<p>Therefore, in order to let the <code class="highlighter-rouge">Edger8r</code> generate the corresponding proxy functions, we put our function <code class="highlighter-rouge">printf_helloworld()</code> in the trusted section of <code class="highlighter-rouge">Enclave.edl</code>. </p>
+
+<script src="https://gist.github.com/sangfansh/35a96c020d08a57d023eb7f8454530f1.js"></script>
+
+<p>By now, the whole hello world application has acquired all the required parts and should be ready to go.</p>
+
+<p>Compile the project by typing <code class="highlighter-rouge">make</code> inside project directory. It should output something like this:
+<img src="/sgx101/assets/pics/enclave_example.png" alt="Enclave Example" /></p>
+
+<p>Then execute the application by typing <code class="highlighter-rouge">./app</code>. <code class="highlighter-rouge">Hello World</code> should be printed to the console. And the message is coming form within the enclave to the outside world!</p>
+
+<p>We can verify the proxy function generated in <code class="highlighter-rouge">Enclave_u.c</code> has the signature mentioned above (line 21).</p>
+
+<script src="https://gist.github.com/sangfansh/1439a803558f63671a35b59168406786.js"></script>
+
+<p>Congratulations you have created your first enclave application!</p>
+
+<hr />
+
+<h2 id="references">References:</h2>
+<ol>
+  <li>https://eprint.iacr.org/2016/086.pdf</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://eprint.iacr.org/2016/086.pdf</li>
+  <li>https://download.01.org/intel-sgx/linux-2.2/docs/Intel_SGX_Developer_Reference_Linux_2.2_Open_Source.pdf</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://insujang.github.io/2017-04-05/intel-sgx-instructions-in-enclave-initialization/</li>
+  <li>https://software.intel.com/en-us/blogs/2016/06/10/overview-of-intel-software-guard-extensions-instructions-and-data-structures</li>
+  <li>https://software.intel.com/en-us/articles/software-guard-extensions-tutorial-series-part-3</li>
+  <li>https://software.intel.com/en-us/articles/intel-software-guard-extensions-tutorial-part-7-refining-the-enclave</li>
+</ol>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

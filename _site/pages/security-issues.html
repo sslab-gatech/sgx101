@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Security Issues &middot; SGX 101
+    
+  </title>
+
+  
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/sgx101/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sgx101/favicon.png" />
+<link rel="shortcut icon" href="/sgx101/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="page">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/sgx101/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        SGX 101
+      </a>
+    </div>
+    <p class="lead">The very first place to study Intel SGX.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/sgx101/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/sslab.html">SSLab</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/bootstrap.html">SGX Bootstrap</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/resources.html">Resources</a>
+    
+  
+
+  
+    
+      <a class="page-link "
+          href="/sgx101/about.html">About Us</a>
+    
+  
+
+
+  
+
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/sgx101/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/sgx101/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+    <a id="search-link"
+       class="icon"
+       title="Search" aria-label="Search"
+       href="/sgx101/search.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+    </a>
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2018.
+  <a href="https://gts3.org/">SSLab.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="page-title">Security Issues</h1>
+</header>
+<div class="content">
+  <p>Although Intel SGX technology claims to deliver various security promises, which we have gone through in previous sections, it is still vulnerable to certain types of attacks. Recent acadamic researches have discovered several such vulnerabilities and prove that Intel SGX is not as secure as we thought.</p>
+
+<p>In this section, <a href="https://taesoo.kim/">Prof. Taesoo Kim</a> explaines known security concerns, including cache/branch side-channel attacks and memory safety issues, and corresponding defenses with various working demos.</p>
+
+<hr />
+
+<h2 id="sgx-security-issues-taesoo-kim">SGX Security Issues (Taesoo Kim)</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0TXR2JNsFBk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>Slides are available <a href="/sgx101/files/security-issues.pdf">here</a>.</p>
+
+<hr />
+
+<h2 id="demos">Demos</h2>
+
+<h4 id="1-branch-shadowing">1. Branch Shadowing</h4>
+
+<p>This video shows how the branch shadowing attack can extract
+RSA private key bits</p>
+
+<ul>
+  <li>Target code: Sliding window exponentiation of mbedTLS</li>
+  <li>Attack code: We modified Linux SGX SDK to run our shadow code</li>
+  <li>Kernel log: Our attack code prints the output of LBR via dmesg</li>
+</ul>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R_C0rfbg3p8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="2-dark-rop">2. Dark ROP</h4>
+
+<p>This video shows how the Dark ROP attack detects
+memcpy() and copy the entire memory contents of
+an enclave to the outside.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kixVRC-SHQE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="3-sgx-page-table-based-attack">3. SGX page-table-based attack</h4>
+
+<p>This video presents the page-table-based attack,
+which is also known as the controlled-channel attack.
+By manipulating the page table and hooking the page
+fault handler, the attacker is able to observe
+precise page access patterns.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MCSlgEqNhIA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="4-sgx-shield">4. SGX-Shield</h4>
+
+<p>This video demonstrates the effectiveness of fine-grained
+ASLR support of SGX-Shield.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0aSilQ5SR58" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="5-t-sgx">5. T-SGX</h4>
+
+<p>This video shows how T-SGX protect an SGX enclave from
+page-table-based attacks.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uHt6D-lHl68" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="6-sgx-bomb">6. SGX-Bomb</h4>
+
+<p>This video shows how the SGX-Bomb attack locks down
+a victim machine.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Sutd0uCdY2E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h4 id="7-sgx-bleed">7. SGX-Bleed</h4>
+
+<p>This video shows how the SGX-Bleed problem leaks
+uninitialized SGX memory via structure padding.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Cd-o_wV4iGk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

@@ -7,32 +7,26 @@ sidebar_sort_order: 3
 
 This is the very place to learn building your first application with Intel SGX in mind.
 
-- [Background](pages/background.html)
+----
 
-- [Overview](pages/overview.html)
+## Contents
 
-- [CCS17 Tutorial](pages/ccs17.html)
+### 1. [Overview](pages/overview.html)
 
-- [Get Started](pages/get-started.html)
-
-- [Application Design](pages/application-design.html)
-
-- [Enclave Layout](pages/enclave-layout.html)
-
-- [Enclave Lifecycle](pages/enclave-lifecycle.html)
+### 2. [Enclave](pages/enclave.html)
  
-- [Enclave Example](pages/enclave-example.html)
- 
-- [Attestation Primitives](pages/attestation-primitives.html)
+### 3. [Attestation](pages/attestation.html)
 
-- [Local Attestation](pages/local-attestation.html)
+### 4. [Sealing](pages/sealing.html)
 
-- [Remote Attestation](pages/remote-attestation.html)
+### 5. [Real-world Example](pages/real-world.html)
 
-- [Remote Attestation Example](pages/remote-attestation-example.html)
+### 6. [Security Issues](pages/security-issues.html)
 
-- [Sealing Primitives](pages/sealing-primitives.html)
+----
 
-- [Sealing Example](pages/sealing-example.html)
+## Bonus
 
-- [Password Wallet Project](pages/wallet.html)
+- A very good three-day security seminar from [Technion'18 summer school program](pages/technion18.html).
+
+- A must-read overall review of Intel SGX from CCS'17: [CCS17 Tutorial](pages/ccs17.html)
